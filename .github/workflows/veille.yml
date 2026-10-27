@@ -1,0 +1,71 @@
+name: veille-vie-finance
+
+on:
+  schedule:
+    - cron: "3-59/10 * * * *"
+  workflow_dispatch:
+    inputs:
+      commande:
+        description: "Commande à lancer"
+        type: choice
+        options: [run, check, test-notify, digest, heartbeat]
+        default: run
+
+permissions:
+  contents: write
+
+concurrency:
+  group: veille-vie-finance
+  cancel-in-progress: false
+
+jobs:
+  veille:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    env:
+      TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+      TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+      FASTLANE_URL: ${{ secrets.FASTLANE_URL }}
+      FASTLANE_TOKEN: ${{ secrets.FASTLANE_TOKEN }}
+      SMTP_USER: ${{ secrets.SMTP_USER }}
+      SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+      ALERT_EMAIL_TO: ${{ secrets.ALERT_EMAIL_TO }}
+      VIE_API_KEY: ${{ secrets.VIE_API_KEY }}
+      COMMANDE: ${{ github.event.inputs.commande || 'run' }}
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Installer les dépendances
+        run: pip install -r requirements.txt
+
+      - name: Lancer la veille
+        run: python -m vie_alert "$COMMANDE"
+
+      - name: Enregistrer l'état
+        if: always() && env.COMMANDE == 'run'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          mkdir -p state
+          git add state/
+          git diff --cached --quiet && { echo "État inchangé."; exit 0; }
+          git commit -q -m "chore: état de la veille [skip ci]"
+          for i in 1 2 3; do
+            if git pull -q --rebase && git push -q; then exit 0; fi
+            git rebase --abort 2>/dev/null || true
+            sleep $((i * 5))
+          done
+          echo "::warning::État non enregistré (conflit)."
+
+      - name: Prévenir en cas d'échec
+        if: failure()
+        run: |
+          [ -n "$TELEGRAM_BOT_TOKEN" ] || exit 0
+          curl -s -o /dev/null -X POST "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
+            --data-urlencode chat_id="${TELEGRAM_CHAT_ID}" \
+            --data-urlencode text="❌ La veille V.I.E a échoué (${COMMANDE}) : ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" || true
