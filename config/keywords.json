@@ -1,0 +1,82 @@
+{
+  "_lisez_moi": "Expressions regulieres appliquees a un texte normalise : minuscules, sans accents, ponctuation remplacee par des espaces (sauf &). Ecris donc 'controleur de gestion' et pas 'Contrôleur de gestion'. Chaque motif est encadre automatiquement par des limites de mot. Fichier partage par le script Python ET par la voie rapide Apps Script.",
+
+  "domaines": {
+    "Marchés financiers": [
+      "sales (&|and|et) trading", "s ?& ?t", "global markets?", "capital markets?", "debt capital markets?", "equity capital markets?", "dcm", "ecm",
+      "marches? (de capitaux|financiers?)", "trad(er|ers|ing)", "structur(ing|eur|euse|eurs|ation)", "structured products?", "produits? structures?",
+      "produits? derives", "derivatives?", "equity derivatives?", "fixed income", "rates", "forex", "fx", "commodit(y|ies)", "matieres premieres",
+      "front office", "middle office", "back office", "securities", "prime brokerage", "brokerage", "broker",
+      "recherche (economique|financiere|actions|credit)", "economist(e|es)?", "strategist(e|es)?"
+    ],
+    "Banque & financement": [
+      "corporate banking", "investment banking", "transaction banking", "private banking", "retail banking",
+      "banque (d investissement|de financement|privee|de detail|commerciale)", "bank(ing|er|ers)?", "banqu(e|es|ier|iere|iers|ieres)",
+      "financements?( structures?| de projets?)?", "financing", "structured finance", "project finance", "trade finance", "export finance",
+      "leveraged finance", "acquisition finance", "real estate finance", "asset finance", "syndicat(ion|ions)", "loans?", "lending",
+      "relationship manager", "wealth management", "gestion de patrimoine", "conseill(er|ere) patrimonial", "affacturage", "factoring",
+      "credit bail", "leasing"
+    ],
+    "Analyse & investissement": [
+      "equity research", "analyste? credit", "credit analy[a-z]*", "asset management", "asset managers?", "gestion d actifs", "gerant(e)?",
+      "portfolio", "portefeuilles?", "funds?", "fonds", "private equity", "capital investissement", "venture capital", "growth equity",
+      "investissements?", "invest(ment|ments)", "m ?& ?a", "mergers?", "fusions?( (et )?acquisitions?)?", "corporate development",
+      "valuations?", "evaluation financiere", "transaction services", "deal advisory", "due diligence", "financial advisory",
+      "ratings? analysts?", "notation financiere"
+    ],
+    "Audit, risques & conformité": [
+      "audit(eur|euse|eurs|euses|or|ors|ing)?", "internal control", "controle (interne|permanent|periodique)", "risks?", "risques?",
+      "compliance", "conformite", "kyc", "aml", "lcb ?ft", "anti money laundering", "financial crime", "fraud", "fraude",
+      "regulatory reporting", "reporting reglementaire", "prudenti(al|el)", "solvency", "solvabilite", "model validation",
+      "backtesting", "stress tests?", "sox", "ifrs", "us gaap", "gaap", "commissaire aux comptes"
+    ],
+    "Fintech & quant": [
+      "fintech", "insurtech", "regtech", "quant", "quants", "quantitati(ve|f|ve analyst)", "actuar[a-z]*", "payments?", "paiements?",
+      "crypto (actifs|assets)", "digital assets", "actifs numeriques", "financial engineer[a-z]*", "ingenieri(e|eur) financier(e)?"
+    ],
+    "Finance internationale": [
+      "(finance|financial|financier|financiere) (international|internationale|regional|regionale|zone|region|apac|emea|latam|amerique|asie|afrique|filiale|filiales)",
+      "(international|internationale|regional|regionale|zone|filiale|subsidiary|country) (finance|financial|controll?er|controlling|treasurer|tresorier|cfo)",
+      "finance de filiales?"
+    ],
+    "Finance d'entreprise": [
+      "corporate finance", "fp ?& ?a", "fpa", "financial planning", "control(e|eur|euse|eurs|euses) de gestion", "controll?ers?", "controlling",
+      "cost controll?er", "business controll?er", "controleu(r|se|rs|ses) (financi(er|ere)|budgetaire|credit)",
+      "financial analy[a-z]*", "analystes? financi(er|ere)s?", "tresor(erie|ier|iere|iers)", "treasur(y|er|ers)", "cash management",
+      "cash manager", "reporting financier", "financial reporting", "consolidation", "comptab[a-z]*", "accounting", "accountants?",
+      "accounts (payable|receivable)", "credit manag(er|ement)", "credit controll?er", "recouvrement", "budget(aire|s)?", "fiscal(ite)?", "tax(es)?",
+      "transfer pricing", "prix de transfert", "investor relations", "relations? investisseurs?", "pricing analysts?", "billing", "facturation",
+      "cfo", "chief financial officer", "daf", "raf"
+    ]
+  },
+
+  "generique": [
+    "financ(e|es|ial|ials|ier|iere|iers|ieres|iero|iera|eiro|eira)", "finanz[a-z]*"
+  ],
+
+  "veto_titre": [
+    "talent acquisition", "acquisition de talents", "customer acquisition", "user acquisition",
+    "quantity surveyors?", "metreu(r|se)",
+    "audit(eur|euse|or|ing)? (qualite|quality|hse|ehs|securite|security|energetique|energy|environnement|environmental|fournisseurs?|suppliers?|process|produits?|products?)",
+    "(quality|qualite|hse|ehs|supplier|fournisseurs?|energy|energetique|environmental|safety) audit(eur|euse|or|ors|ing|s)?",
+    "assurance qualite", "quality assurance",
+    "risks? (hse|ehs|safety)", "(hse|ehs|safety) risks?", "risques? (hse|professionnels|industriels|chimiques|psychosociaux)",
+    "fund ?raising (event|evenementiel)",
+    "sales engineers?", "ingenieu(r|re)s? (commercia(l|le|ux)|d affaires)", "business develop(er|ers|ment manager|ment representative)"
+  ],
+
+  "exclusions_si_description_seule": [
+    "business develop[a-z]*", "developpement (commercial|des ventes|business|international|territorial|produit)", "commercia(l|le|les|ux)",
+    "sales", "ventes?", "marketing", "communication", "achats?", "acheteu(r|se)", "purchas[a-z]*", "procurement", "sourcing",
+    "supply chain", "logisti[a-z]*", "ingenieu(r|re|rs)", "engineer(s|ing)?", "developpeu(r|se)", "developer", "software", "logiciels?",
+    "data engineer", "devops", "cloud", "it", "informatique", "reseaux", "rh", "ressources humaines", "human resources", "hr",
+    "recrut[a-z]*", "talent", "qualite", "quality", "production", "maintenance", "technici(en|enne|an)", "designer", "design",
+    "product (manager|owner)", "customer (success|service)", "service client"
+  ],
+
+  "seuil_description": 3,
+
+  "vie_texte_libre": [
+    "volontariat international", "international volunteer", "volontaire international", "vie contract", "contrat vie", "v i e"
+  ]
+}

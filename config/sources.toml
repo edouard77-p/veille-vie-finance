@@ -1,0 +1,87 @@
+# ============================================================================
+#  Réglages du script Python (GitHub Actions)
+#  Les mots-clés finance sont dans config/keywords.json (partagés avec Apps Script).
+#  Une entrée dont l'URL est vide est ignorée : tu peux laisser les modèles.
+# ============================================================================
+
+[general]
+heartbeat_hour = 20            # heure de Paris du bilan quotidien Telegram (-1 = désactivé)
+max_notifications_per_run = 30 # au-delà, les offres restantes arrivent groupées dans un seul message
+include_via = false            # true pour recevoir aussi les V.I.A (volontariat en administration)
+failure_alert_after = 3        # échecs consécutifs d'une source avant de t'alerter
+fastlane_stale_minutes = 20    # voie rapide considérée en panne si pas de scan depuis N min
+
+[business_france]
+enabled = true
+# Si la voie rapide Apps Script fonctionne, le script Python ne scanne Business
+# France qu'en secours, toutes les N minutes. Sans voie rapide : à chaque passage.
+backup_interval_minutes = 30
+
+# ----------------------------------------------------------------------------
+#  Flux RSS : Google Alerts, Talkwalker Alerts, ou tout autre flux.
+#  require_vie     : l'élément doit mentionner VIE / V.I.E / volontariat international
+#  require_finance : le titre ou l'extrait doit relever de la finance
+# ----------------------------------------------------------------------------
+[[rss]]
+name = "Google Alerts – V.I.E finance (FR)"
+url = ""
+require_vie = false
+require_finance = true
+
+[[rss]]
+name = "Google Alerts – VIE finance (EN)"
+url = ""
+require_vie = false
+require_finance = true
+
+[[rss]]
+name = "Google Alerts – LinkedIn VIE finance"
+url = ""
+require_vie = false
+require_finance = true
+
+[[rss]]
+name = "Talkwalker – V.I.E finance"
+url = ""
+require_vie = false
+require_finance = true
+
+# ----------------------------------------------------------------------------
+#  Pages carrières surveillées (robots.txt respecté automatiquement).
+#  link_pattern : morceau d'URL qui identifie un lien d'offre sur la page
+#  assume_vie   : la page ne liste que des V.I.E
+#  fetch_details: ouvre chaque NOUVELLE offre pour lire sa description (max 5/passage)
+# ----------------------------------------------------------------------------
+[[page_watch]]
+name = "BNP Paribas – offres V.I.E"
+url = "https://group.bnpparibas/emploi-carriere/toutes-offres-emploi/vie"
+link_pattern = "/emploi-carriere/offre-emploi/"
+assume_vie = true
+fetch_details = true
+
+# ----------------------------------------------------------------------------
+#  Sites carrières sur logiciels de recrutement (API publiques JSON).
+#  Ajoute une entreprise en recopiant un bloc ; « python -m vie_alert check »
+#  (ou l'action « check » sur GitHub) te dit si elle répond correctement.
+#  Seules les offres mentionnant VIE / V.I.E sont retenues.
+# ----------------------------------------------------------------------------
+# Workday : l'URL de la page carrières ressemble à https://<tenant>.wd3.myworkdayjobs.com/<site>
+[[workday]]
+name = "Exemple Workday (à remplacer)"
+url = ""                       # ex. "https://<tenant>.wd3.myworkdayjobs.com/<site>"
+search = ["VIE", "V.I.E", "volontariat"]
+
+# Greenhouse : https://boards.greenhouse.io/<board>  -> board = "<board>"
+[[greenhouse]]
+name = "Exemple Greenhouse (à remplacer)"
+board = ""
+
+# Lever : https://jobs.lever.co/<entreprise>  -> company = "<entreprise>"
+[[lever]]
+name = "Exemple Lever (à remplacer)"
+company = ""
+
+# SmartRecruiters : https://jobs.smartrecruiters.com/<Entreprise> -> company = "<Entreprise>"
+[[smartrecruiters]]
+name = "Exemple SmartRecruiters (à remplacer)"
+company = ""

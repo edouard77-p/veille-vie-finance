@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:idx="urn:atom-extension:indexing">
+  <id>tag:google.com,2005:reader/user/0000/state/com.google/alerts/1111</id>
+  <title>Alerte Google - "V.I.E" finance</title>
+  <updated>2026-10-26T09:12:00Z</updated>
+  <entry>
+    <id>tag:google.com,2013:googlealerts/feed:1</id>
+    <title type="html">&lt;b&gt;V.I.E&lt;/b&gt; - Treasury Analyst - Singapore</title>
+    <link href="https://www.google.com/url?rct=j&amp;sa=t&amp;url=https://www.linkedin.com/jobs/view/123456&amp;ct=ga&amp;cd=CAIyAA&amp;usg=AOvVaw1" />
+    <published>2026-10-26T09:12:00Z</published>
+    <updated>2026-10-26T09:12:00Z</updated>
+    <content type="html">Rejoignez notre équipe &lt;b&gt;Treasury&lt;/b&gt; à Singapour dans le cadre d'un &lt;b&gt;V.I.E&lt;/b&gt; de 12 mois…</content>
+  </entry>
+  <entry>
+    <id>tag:google.com,2013:googlealerts/feed:2</id>
+    <title type="html">La &lt;b&gt;vie&lt;/b&gt; d'expatrié à Dubaï</title>
+    <link href="https://www.google.com/url?rct=j&amp;sa=t&amp;url=https://blog.example.com/expat&amp;ct=ga" />
+    <published>2026-10-26T08:00:00Z</published>
+    <updated>2026-10-26T08:00:00Z</updated>
+    <content type="html">Témoignage sur la vie quotidienne.</content>
+  </entry>
+</feed>
