@@ -2,21 +2,23 @@
  "bf_last_scan": "2026-11-10T08:45:36Z",
  "daily": {
   "date": "2026-11-10",
-  "errors": 0,
+  "errors": 1,
   "new_finance": 0,
   "notified": 0,
-  "runs": 11
+  "runs": 12
  },
  "last_heartbeat": "2026-11-09",
- "last_run": "2026-11-10T08:45:36Z",
+ "last_run": "2026-11-10T09:38:39Z",
  "sources": {
   "Business France": {
    "alerted": false,
-   "consecutive_failures": 0,
+   "consecutive_failures": 1,
    "last_count": 885,
-   "last_error": "",
+   "last_error": "HTTPSConnectionPool(host='civiweb-api-prd.azurewebsites.net', port=443): Max retries exceeded with url: /api/Offers/search (Caused by ReadTimeoutError(\"HTTPSConnectionPool(host='civiweb-api-prd.azurewebsites.net', port=443): Read timed out. (read timeout=25)\"))",
+   "last_fail": "2026-11-10T09:38:39Z",
    "last_ok": "2026-11-10T08:45:36Z",
-   "ok": true
+   "ok": false,
+   "recovered": false
   }
  }
 }
