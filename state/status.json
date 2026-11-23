@@ -1,14 +1,14 @@
 {
- "bf_last_scan": "2026-11-23T19:42:26Z",
+ "bf_last_scan": "2026-11-23T20:30:07Z",
  "daily": {
   "date": "2026-11-23",
   "errors": 0,
   "new_finance": 6,
   "notified": 6,
-  "runs": 20
+  "runs": 21
  },
  "last_heartbeat": "2026-11-23",
- "last_run": "2026-11-23T19:42:28Z",
+ "last_run": "2026-11-23T20:30:07Z",
  "sources": {
   "Business France": {
    "alerted": false,
@@ -16,7 +16,7 @@
    "last_count": 821,
    "last_error": "",
    "last_fail": "2026-11-17T21:30:04Z",
-   "last_ok": "2026-11-23T19:42:26Z",
+   "last_ok": "2026-11-23T20:30:07Z",
    "ok": true
   }
  }
